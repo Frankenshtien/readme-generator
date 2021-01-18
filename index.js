@@ -39,7 +39,7 @@ const writeToFile = (fileData) => {
 
 // TODO: Create a function to initialize app
 // function init() {}
-const promptUser = () => {
+const init = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -86,6 +86,12 @@ const promptUser = () => {
             }
         },
         {
+            type: 'confirm',
+            name: 'confirmLicense',
+            message: 'Would you like to add a license?',
+            default: false
+        },
+        {
             type: 'checkbox',
             name: 'license',
             message: licenseQ,
@@ -98,12 +104,27 @@ const promptUser = () => {
                 'MIT',
                 'BSL-1.0',
                 'Unlicense'
-            ]
+            ],
+            when: ({confirmLicense}) => {
+                if (confirmLicense) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'contributions',
-            message: contributionsQ
+            message: contributionsQ,
+            validate: contributionsInput => {
+                if (contributionsInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the contributors!")
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
@@ -137,5 +158,17 @@ const promptUser = () => {
 
 
 // Function call to initialize app
-//init();
+init()
+.then(readmeData => {
+    return generateMarkdown(readmeData)
+})
+.then(markdownData => {
+    writeToFile(markdownData);
+})
+.then(writeToFileResponse => {
+    console.log("File created successfully!");
+})
+.catch(err => {
+    console.log(err);
+});
 
