@@ -1,32 +1,36 @@
 
-# something
+# Something cool.
 
 ## Description:
 
-you do stuff with things
+You use it to make your life easier.
 
 ## Table of Contents
 
 * [installation](#installation)
 * [usage](#usage)
 * [contributions](#contributions)
-* [license](#license)
+* [testing](#tests)
+* [questions](#questions)
 
 ## Installation:
 
-i dont know anymore
+download it on github.
 
 ## Contributions:
 
-Built by:
-me
+there no contribution guidelines.
+
+## Tests:
+
+simply run the application.
 
 
 ## License:
-[MIT](http://choosealicense.com/licenses/MIT/)
+[unlicense](http://choosealicense.com/licenses/unlicense/)
         
 
-### Questions:
+## Questions:
 
-Please direct any questions to me on GitHub or email me.
+Please direct any questions to frankenshtien on GitHub or email me@email.com.
     

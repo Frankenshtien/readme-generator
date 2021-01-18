@@ -11,14 +11,15 @@ const questions = [
     "What is this project called?", 
     "Give a brief description of this application; what is does, why you made it, how you made it.",
     "How does one go about installing this application?",
-    "What is the use case of it?",
+    "What are the usage instructions?",
     "What license does it use?",
-    "Who contributed to it?",
+    "What are the contribution guidelines?",
+    "What tests can you run to make sure it's working?",
     "What is your GitHub username?",
     "What is your email?"
 ];
 
-const [titleQ, descriptionQ, installationQ, usageQ, licenseQ, contributionsQ, githubQ, emailQ] = questions;
+const [titleQ, descriptionQ, installationQ, usageQ, licenseQ, contributionsQ, testQ, githubQ, emailQ] = questions;
 
 // TODO: Create a function to write README file
 // function writeToFile(fileName, data) {}
@@ -71,6 +72,13 @@ const init = () => {
             type: 'input',
             name: 'installation',
             message: installationQ,
+            validate: installationInput => {
+                if (installationInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the installation instructions!")
+                }
+            }
         },
         {
             type: 'input',
@@ -80,7 +88,7 @@ const init = () => {
                 if (usageInput) {
                     return true;
                 } else {
-                    console.log("Please describe the usage!");
+                    console.log("Please describe the applications usage!");
                     return false;
                 }
             }
@@ -96,14 +104,14 @@ const init = () => {
             name: 'license',
             message: licenseQ,
             choices: [
-                'AGPL-3.0', 
-                'GPL-3.0', 
-                'LGPL-3.0', 
-                'MPL-2.0',
-                'Apache-2.0',
-                'MIT',
-                'BSL-1.0',
-                'Unlicense'
+                'agpl-3.0', 
+                'gpl-3.0', 
+                'lgpl-3.0', 
+                'mpl-2.0',
+                'apache-2.0',
+                'mit',
+                'bsl-1.0',
+                'unlicense'
             ],
             when: ({confirmLicense}) => {
                 if (confirmLicense) {
@@ -121,7 +129,20 @@ const init = () => {
                 if (contributionsInput) {
                     return true;
                 } else {
-                    console.log("Please enter the contributors!")
+                    console.log("Please enter the contribution guidelines!")
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'tests',
+            message: testQ,
+            validate: (testsInput) => {
+                if (testsInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the test that can be run!");
                     return false;
                 }
             }
@@ -144,7 +165,7 @@ const init = () => {
             name: 'email',
             message: emailQ,
             validate: emailInput => {
-                if (emailQ) {
+                if (emailInput) {
                     return true;
                 } else {
                     console.log("Please enter your email!")
@@ -166,7 +187,7 @@ init()
     writeToFile(markdownData);
 })
 .then(writeToFileResponse => {
-    console.log("File created successfully!");
+    console.log("File created successfully! Find it in the 'dist' folder of this application!");
 })
 .catch(err => {
     console.log(err);
